@@ -2,8 +2,11 @@
   "name": "react",
   "version": "1.0.0",
   "description": "",
+  "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "parcel index.html",
+    "build": "parcel build index.html"
   },
   "repository": {
     "type": "git",
@@ -22,5 +25,6 @@
   "devDependencies": {
     "parcel": "^2.12.0",
     "process": "^0.11.10"
-  }
+  },
+  "browserslist": ["last 2 version"]
 }
