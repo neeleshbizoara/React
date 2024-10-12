@@ -1,0 +1,26 @@
+{
+  "name": "react",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/neeleshbizoara/React.git"
+  },
+  "author": "Neelesh Bizoara",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/neeleshbizoara/React/issues"
+  },
+  "homepage": "https://github.com/neeleshbizoara/React#readme",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "parcel": "^2.12.0",
+    "process": "^0.11.10"
+  }
+}
