@@ -1,0 +1,13 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+}
+
+nav a {
+    text-decoration: none;
+    margin: 10px;
+    align-content: flex-end;
+    color: white;
+    font-style: italic;
+    font-weight: 800;
+}
