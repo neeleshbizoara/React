@@ -1,9 +1,11 @@
-import resImg from "./res.jpg";
+import { Link } from "react-router-dom";
+import { CDN_URL } from "../../../utill/common";
 import styles from "./resCart.module.css";
 
 export const ResCart = (props) => {
     const { restData } = props;
-    const imgSrc = 'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/'
+    // const imgSrc = 'https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/'
+    const imgSrc = CDN_URL
     // console.log(restData);
     // return<div>Hi</div>
     // debugger;
@@ -13,6 +15,7 @@ export const ResCart = (props) => {
             <h3>{restData?.name}</h3>
             <h4>{restData?.cuisines.join(', ')}</h4>
             <h4> {restData?.avgRatingString}</h4>
+            <Link to={`/restaurant/${restData.id}`}>Show Details</Link>
             {/* <h4>{deliveryTime}</h4> */}
         </div>
     );

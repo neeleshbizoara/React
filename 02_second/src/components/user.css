@@ -1,0 +1,16 @@
+.user-card {
+    border: 1px solid red;
+}
+
+.user-container {
+    display: flex;
+    flex-direction: column;
+    column-gap: 6px;
+}
+
+label {
+    font-weight: 800;
+    padding-right: 10px;
+    width: 100px;
+    display: inline-flex;
+}

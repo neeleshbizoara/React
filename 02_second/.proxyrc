@@ -1,0 +1,7 @@
+{
+  "/dapi": {
+    "target": "https://www.swiggy.com",
+    "secure": false,
+    "changeOrigin": true
+  }
+}
