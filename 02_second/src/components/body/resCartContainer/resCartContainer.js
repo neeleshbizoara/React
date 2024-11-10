@@ -1,4 +1,4 @@
-import { ResCart } from "../ResCart/ResCart";
+import ResCart, { DiscountResCart } from "../ResCart/ResCart";
 import { data as initialData } from "../../../utill/data";
 import styles from "./resCartContainer.module.css";
 import { useEffect, useState } from "react";
@@ -16,28 +16,46 @@ export const ResCartContainer = (props) => {
   }, []);
 
   const fetchData = async () => {
-    const url =
-      "/dapi/restaurants/list/v5?lat=18.598764164757174&lng=73.76075505061787&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
+    // const url =
+    //   "/dapi/restaurants/list/v5?lat=18.598764164757174&lng=73.76075505061787&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING";
 
+    const url =
+      "/dapi/restaurants/search/v3?lat=18.6051462&lng=73.7567953&str=wakad&trackingId=undefined&submitAction=ENTER&queryUniqueId=e778fbe2-d923-a274-176d-98ff27eda493";
     // const url = 'https://www.swiggy.com/dapi/restaurants/list/v5?lat=18.598764164757174&lng=73.76075505061787&is-seo-homepage-enabled=true&page_type=DESKTOP_WEB_LISTING'
     // const data = fetch(url).then(d => console.log(d)).catch(err => console.log(err))
     // const url = 'https://jsonplaceholder.typicode.com/photos'
     const data = await fetch(url);
     const json = await data.json();
+    // debugger;
+    console.log(
+      json.data.cards[1].groupedCard.cardGroupMap.RESTAURANT.cards.filter(
+        (card) => card.card.card.info.name === "Indian Thali House"
+      )
+    );
     console.log(
       "get Data",
-      json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+      json.data.cards[1].groupedCard.cardGroupMap.RESTAURANT.cards
     );
     setFilteredData(
-      json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+      json.data.cards[1].groupedCard.cardGroupMap.RESTAURANT.cards
     );
+    // console.log(
+    //   "get Data",
+    //   json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+    // );
+    // setFilteredData(
+    //   json.data.cards[4].card.card.gridElements.infoWithStyle.restaurants
+    // );
     // setTimeout(() => setFilteredData(initialData), 3000);
   };
 
   console.log("Cart render");
 
+// Usage of DiscountResCart
+const WrappedResCart = DiscountResCart(ResCart);
+
   const filterRestList = (param) => {
-    debugger;
+    // debugger;
     if (param && param !== cacheSearchText) {
       cacheSearchText = param;
       const data = initialData.filter((elem) =>
@@ -56,20 +74,26 @@ export const ResCartContainer = (props) => {
     }
     return () => {
       // Called when component is unmount
-      setFilteredData([])
-    }
+      setFilteredData([]);
+    };
   }, [props.refCallback]);
 
   return filteredData.length === 0 ? (
     <Shimmer />
   ) : (
     <div className={styles.container}>
-      {filteredData.map(({ info }, index) => {
-        return (
-          // <Link to={`/restaurant/${info.id}`} key={info.id} >
-            <ResCart restData={info} key={info.id}/>
-          // </Link>
-        );
+        {filteredData.map(({ card }, index) => {
+          if (card.card.info.aggregatedDiscountInfoV3) {
+            // console.log('Discount', card.card.info)
+            return <WrappedResCart restData={card.card.info} key={card.card.info.id} uid={ card.card.analytics.context} />
+          } else {
+            // console.log('No Discount', card.card.info)
+            return <ResCart restData={card.card.info} key={card.card.info.id}  uid={ card.card.analytics.context}/>
+        }
+        // return card.card.info.aggregatedDiscountInfoV3 ?  <WrappedResCart restData={card.card.info} /> :
+        //   // <Link to={`/restaurant/${info.id}`} key={info.id} >
+        //   <ResCart restData={card.card.info} key={card.card.info.id} />
+        //   // </Link>
       })}
     </div>
   );

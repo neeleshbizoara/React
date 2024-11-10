@@ -11,12 +11,12 @@ const SearchBar = (props) => {
         props.filterRestByName(searchText);
     }
     return (
-        <div style={{display: "flex", flexDirection: 'row' }}>
-            <input className={styles.filterInput} type="text" value={searchText} onChange={(e) => {
+        <div className='flex row-auto justify-start gap-4' >
+            <input className="border border-solid rounded-sm" type="text" value={searchText} onChange={(e) => {
                 setSearchText(e.target.value)
             }}></input>
-            <button className={styles.searchBtn} onClick={getRestFilterByName}>Search</button>
-            <button className={styles.searchBtn} onClick={getTopRatedRestaurant}
+            <button className='px-2 py-2 rounded-sm bg-blue-100 hover:bg-blue-300 ' onClick={getRestFilterByName}>Search</button>
+            <button className='px-2 py-2 rounded-sm bg-blue-100 hover:bg-blue-300 ' onClick={getTopRatedRestaurant}
                 onMouseOver={() => { console.log('On Mouse Over') }}>
                 Top Rated Restaurant
             </button>
