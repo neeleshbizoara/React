@@ -16,7 +16,9 @@ function useRestauarantMenu(props) {
     setRestInfo(json.data);
   };
 
-  return restInfo;
+  // return restInfo;
+
+  return null
 }
 
 export default useRestauarantMenu;
